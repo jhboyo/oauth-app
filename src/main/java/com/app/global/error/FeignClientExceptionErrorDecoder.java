@@ -29,6 +29,6 @@ public class FeignClientExceptionErrorDecoder implements ErrorDecoder {
                     response.request()
             );
         }
-        return null;
+        return errorDecoder.decode(methodKey, response);
     }
 }
