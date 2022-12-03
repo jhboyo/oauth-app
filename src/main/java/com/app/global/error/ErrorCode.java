@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorCode {
+
+    BUSINESS_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "001", "business exception");
     ;
 
     private final HttpStatus httpStatus;
