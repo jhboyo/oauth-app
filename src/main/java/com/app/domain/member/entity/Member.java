@@ -4,6 +4,7 @@ import com.app.domain.common.BaseEntity;
 import com.app.domain.member.constant.MemberType;
 import com.app.domain.member.constant.Role;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -45,6 +46,16 @@ public class Member extends BaseEntity {
     private LocalDateTime tokenExpirationTime;
 
 
+    @Builder
+    public Member(MemberType memberType, String email, String password,
+                  String memberName, String profile, Role role) {
+        this.memberType = memberType;
+        this.email = email;
+        this.password = password;
+        this.memberName = memberName;
+        this.profile = profile;
+        this.role = role;
+    }
 
 
 }

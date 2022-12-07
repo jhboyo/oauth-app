@@ -27,10 +27,15 @@ public class KakaoTokenController {
         return "loginForm";
     }
 
+    /**
+     * 웹 화면에서 카카오 로그인 후 받는 콜백 api.
+     * Authorization code가 함께 온다.
+     * Authorization 코드를 담아서 카카오 Authorization Server에 Token 요청한다.
+     */
     @GetMapping("/oauth/kakao/callback")
     public @ResponseBody String loginCallback(String code) {
 
-        String conentType = "application/x-www-form-urlencoded;charset=utf-8";
+        String contentType = "application/x-www-form-urlencoded;charset=utf-8";
         KakaoTokenDto.Request kakaoTokenRequestDto = KakaoTokenDto.Request.builder()
                             .client_id(clientId)
                             .client_secret(clientScret)
@@ -39,7 +44,7 @@ public class KakaoTokenController {
                             .redirect_uri("http://localhost:8080/oauth/kakao/callback")
                             .build();
 
-        KakaoTokenDto.Response kakaoToken = kakaoTokenClient.requestKakaoToken(conentType, kakaoTokenRequestDto);
+        KakaoTokenDto.Response kakaoToken = kakaoTokenClient.requestKakaoToken(contentType, kakaoTokenRequestDto);
 
         return "kakao token : " + kakaoToken;
     }

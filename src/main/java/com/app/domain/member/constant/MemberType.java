@@ -1,6 +1,6 @@
 package com.app.domain.member.constant;
 
-public enum MemberType {
+public enum  MemberType {
 
     KAKAO;
 }
