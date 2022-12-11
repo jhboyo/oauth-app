@@ -12,7 +12,8 @@ import com.app.global.jwt.dto.JwtTokenDto;
 import com.app.global.jwt.service.TokenManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 @Service
@@ -41,10 +42,11 @@ public class OauthLoginService {
         //카카오서비스에서 받아온 이메일로 회원 정보가 존재하는지 먼저 확인한다.
         Optional<Member> optionalMember = memberService.findMemberByEmail(userInfo.getEmail());
         if (optionalMember.isEmpty()) { //신규 회원 가입
+            //기본 회원정보 먼저 등록 후
             Member oauthMember = userInfo.toMemberEntity(memberType, Role.ADMIN);
             oauthMember = memberService.registerMember(oauthMember);
 
-            // 토큰 생성...위에서 토큰을 카카오로부터 가져왔는데 또 어떤 토큰을 생성하는지..
+            // refresh token 업데이트
             jwtTokenDto = tokenManager.createJwtTokenDto(oauthMember.getMemberId(), oauthMember.getRole());
             oauthMember.updateRefreshToken(jwtTokenDto);
         } else { //기존 회원일 경우
