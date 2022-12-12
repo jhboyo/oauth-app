@@ -8,10 +8,7 @@ import com.app.global.error.exception.AuthenticationToeknExpirationException;
 import com.app.global.jwt.constant.GrantType;
 import com.app.global.jwt.constant.TokenType;
 import com.app.global.jwt.dto.JwtTokenDto;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
@@ -90,6 +87,8 @@ public class TokenManager {
         } catch (ExpiredJwtException e) {
             log.info("token 만료", e);
             throw new AuthenticationToeknException(ErrorCode.TOKEN_EXPIRED);
+        }catch (SignatureException | MalformedJwtException e) { //서명 오류 or JWT 구조 문제
+             throw new AuthenticationToeknException(ErrorCode.TOKEN_SIGNATURE_NOT_VALID);
         } catch (Exception e) {
             log.info("유효하지 않은 token",  e);
             throw new AuthenticationToeknExpirationException(ErrorCode.NOT_VALID_TOKEN);
