@@ -4,6 +4,8 @@ import antlr.Token;
 import com.app.api.member.dto.MemberInfoResponseDto;
 import com.app.api.member.service.MemberInfoService;
 import com.app.global.jwt.service.TokenManager;
+import com.app.global.resolver.memberinfo.MemberInfo;
+import com.app.global.resolver.memberinfo.MemberInfoDto;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +27,23 @@ public class MemberInfoController {
         this.tokenManager = tokenManager;
     }
 
+    /* 아래 ResolveArguementHandler를 사용한 방식으로 변경 -> 어노테이션 생서으로 반복코드 줄임
     @GetMapping("/info")
-    public ResponseEntity<MemberInfoResponseDto> getMemberInfo(
-            @RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<MemberInfoResponseDto> getMemberInfo(@RequestHeader("Authorization") String authorizationHeader) {
 
         String accessToken = authorizationHeader.split(" ")[1];
         Claims tokenClaims = tokenManager.getTokenClaims(accessToken);
         Long memberId = Long.valueOf((Integer) tokenClaims.get("memberId"));
 
+        MemberInfoResponseDto memberInfoResponseDto = memberInfoService.getMemberInfo(memberId);
+
+        return ResponseEntity.ok(memberInfoResponseDto);
+    }*/
+
+    @GetMapping("/info")
+    public ResponseEntity<MemberInfoResponseDto> getMemberInfo(@MemberInfo MemberInfoDto memberInfoDto) {
+
+        Long memberId = memberInfoDto.getMemberId();
         MemberInfoResponseDto memberInfoResponseDto = memberInfoService.getMemberInfo(memberId);
 
         return ResponseEntity.ok(memberInfoResponseDto);
