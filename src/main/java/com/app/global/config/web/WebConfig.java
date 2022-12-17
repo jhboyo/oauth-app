@@ -1,5 +1,6 @@
 package com.app.global.config.web;
 
+import com.app.global.interceptor.AdminAuthorizationInterceptor;
 import com.app.global.interceptor.AuthenticationInterceptor;
 import com.app.global.resolver.memberinfo.MemberInfoArgumentResolver;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +17,12 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final AuthenticationInterceptor authenticationInterceptor;
     private final MemberInfoArgumentResolver memberInfoArgumentResolver;
+    private final AdminAuthorizationInterceptor adminAuthorizationInterceptor;
 
-    public WebConfig(AuthenticationInterceptor authenticationInterceptor, MemberInfoArgumentResolver memberInfoArgumentResolver) {
+    public WebConfig(AuthenticationInterceptor authenticationInterceptor, MemberInfoArgumentResolver memberInfoArgumentResolver, AdminAuthorizationInterceptor adminAuthorizationInterceptor) {
         this.authenticationInterceptor = authenticationInterceptor;
         this.memberInfoArgumentResolver = memberInfoArgumentResolver;
+        this.adminAuthorizationInterceptor = adminAuthorizationInterceptor;
     }
 
     @Override
@@ -45,6 +48,10 @@ public class WebConfig implements WebMvcConfigurer {
                                     "/api/access-token/issue",
                                     "/api/logout",
                                     "/api/health");
+        registry.addInterceptor(adminAuthorizationInterceptor)
+                .order(2)
+                .addPathPatterns("/api/admin/**");
+
     }
 
 

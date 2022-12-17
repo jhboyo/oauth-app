@@ -43,7 +43,7 @@ public class OauthLoginService {
         Optional<Member> optionalMember = memberService.findMemberByEmail(userInfo.getEmail());
         if (optionalMember.isEmpty()) { //신규 회원 가입
             //기본 회원정보 먼저 등록 후
-            Member oauthMember = userInfo.toMemberEntity(memberType, Role.ADMIN);
+            Member oauthMember = userInfo.toMemberEntity(memberType, Role.USER);
             oauthMember = memberService.registerMember(oauthMember);
 
             // refresh token 업데이트
