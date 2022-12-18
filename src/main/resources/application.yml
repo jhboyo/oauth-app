@@ -20,13 +20,14 @@ spring:
         format_sql: true
         default_batch_fetch_size: 500 #일대다 컬렉션 조회 시 성능 최적화
     open-in-view: false # 영속석 컨텍스트이 생존 범위를 트랜잭션 범위로 한정
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+
 
 
 logging:
@@ -56,3 +57,4 @@ jasypt:
   encryptor:
     #password:
     password: ${PASSWORD} #vm option에 추가한 값
+
