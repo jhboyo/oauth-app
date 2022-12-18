@@ -40,10 +40,14 @@ feign:
 
 kakao:
   client:
-    id: 5d306340300d4eb5f907947d4cc59779
-    secret: paFeDqi0x8AgZ7DAM4clDNI1eurKjRpn
+    id: ENC(4FiqrXuXgOuTKUheOf605wI8o+ApKKqFSKszYm943JqxGQG66bamvv32WMAQjDJf)
+    secret: ENC(yoWG9HSNsR6ypXGkfH80364o2/90u/IRQ/crTm0Gj7/iMMm6vpsnQAJJQe2Fb2YH)
 
 token:
-  secret: ENC(9c9uJh1XDJMe72tcz8o94Z1pqQxRrUdKaxFAlScPFuIGZtp57tFR3Q==) # 임의의 문자열
+  secret: ENC(5UrGEFXTCIjP0mH1Y7yFbFBrJBMMjb2+zIEt2KqDiHN+jpXhQzVCINDfIhEFvbdy) # JWT 생성 시 사용할 임의의 문자열
   access-token-expiration-time: 900000  # 15분 1000(ms) x 60(s) x 15(m)
   refresh-token-expiration-time: 1209600000 # 2주 1000(ms) x 60 (s) x 60(m) x 24(h) x 14(d)
+
+
+jasypt:
+  password: ${PASSWORD} #vm option에 추가한 값

@@ -1,6 +1,5 @@
 package com.app.global.jwt.service;
 
-
 import com.app.domain.member.constant.Role;
 import com.app.global.error.ErrorCode;
 import com.app.global.error.exception.AuthenticationToeknException;
@@ -52,7 +51,7 @@ public class TokenManager {
     }
 
     public String createAccessToken(Long memberId, Role role, Date expirationTime) {
-        String accessToken = Jwts.builder()
+        return Jwts.builder()
                 .setSubject(TokenType.ACCESS.name())
                 .setIssuedAt(new Date())
                 .setExpiration(expirationTime)
@@ -61,13 +60,11 @@ public class TokenManager {
                 .signWith(SignatureAlgorithm.HS512, tokenSecret.getBytes(StandardCharsets.UTF_8))
                 .setHeaderParam("type", "JWT")
                 .compact();
-
-        return accessToken;
     }
 
 
     public String createRefreshToken(Long memberId, Date expirationTime) {
-        String refreshToken = Jwts.builder()
+        return Jwts.builder()
                 .setSubject(TokenType.REFRESH.name())
                 .setIssuedAt(new Date())
                 .setExpiration(expirationTime)
@@ -75,8 +72,6 @@ public class TokenManager {
                 .signWith(SignatureAlgorithm.HS512, tokenSecret.getBytes(StandardCharsets.UTF_8))
                 .setHeaderParam("type", "JWT")
                 .compact();
-
-        return refreshToken;
     }
 
 
