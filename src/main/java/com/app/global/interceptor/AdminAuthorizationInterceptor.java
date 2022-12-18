@@ -1,6 +1,5 @@
 package com.app.global.interceptor;
 
-
 import com.app.domain.member.constant.Role;
 import com.app.global.error.ErrorCode;
 import com.app.global.error.exception.AuthenticationToeknException;
