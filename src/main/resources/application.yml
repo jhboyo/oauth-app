@@ -24,6 +24,9 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 
 logging:
@@ -38,3 +41,18 @@ feign:
         connectTimeout: 5000
         readTimeout: 5000
 
+kakao:
+  client:
+    id: ENC(4FiqrXuXgOuTKUheOf605wI8o+ApKKqFSKszYm943JqxGQG66bamvv32WMAQjDJf)
+    secret: ENC(yoWG9HSNsR6ypXGkfH80364o2/90u/IRQ/crTm0Gj7/iMMm6vpsnQAJJQe2Fb2YH)
+
+token:
+  secret: ENC(5UrGEFXTCIjP0mH1Y7yFbFBrJBMMjb2+zIEt2KqDiHN+jpXhQzVCINDfIhEFvbdy) # JWT 생성 시 사용할 임의의 문자열
+  access-token-expiration-time: 9000001212  # 15분 1000(ms) x 60(s) x 15(m)
+  refresh-token-expiration-time: 1209600000 # 2주 1000(ms) x 60 (s) x 60(m) x 24(h) x 14(d)
+
+
+jasypt:
+  encryptor:
+    #password:
+    password: ${PASSWORD} #vm option에 추가한 값
