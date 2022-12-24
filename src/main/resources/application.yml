@@ -22,13 +22,11 @@ spring:
     open-in-view: false # 영속석 컨텍스트이 생존 범위를 트랜잭션 범위로 한정
   mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: ant_path_matcher #Swagger 3.0지원
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
-
-
 
 logging:
   level:
