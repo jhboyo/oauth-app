@@ -45,7 +45,7 @@ class MemberInfoControllerTest {
         request.setMemberType("KAKAO");
 
         ResultActions resultActions = this.mockMvc.perform(post("/api/oauth/login")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + "G5EFX6woTVPfJOShl5OEO1_y7bnX8Q5BiyNo9mWCCinI2QAAAYUkSX77")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + "_Gcx45bXFawtq-BLs6rzmUgeKAmWJMQiJdgVmw6oCisMqAAAAYVBVBUe")
                 .content(objectMapper.writeValueAsString(request))
                 .contentType(MediaType.APPLICATION_JSON)
 

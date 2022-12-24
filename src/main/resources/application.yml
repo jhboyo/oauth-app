@@ -55,6 +55,6 @@ token:
 
 jasypt:
   encryptor:
-    #password:
-    password: ${PASSWORD} #vm option에 추가한 값
+    password: 1dladmldmlanswkduf#-2qlalfqjsgh@
+    #password: ${PASSWORD} #vm option에 추가한 값
 
