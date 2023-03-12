@@ -30,7 +30,7 @@ public class OauthLoginController {
     }
 
     @Tag(name="authentication")
-    @Operation(summary = "소셜 로그인 API", description = "소셜 로그인 API")
+    @Operation(summary = "소셜 로그인 API", description = "로그인으로 accessToken 등 취득")
     @PostMapping("/login")
     public ResponseEntity<OauthLoginDto.Response> oauthLogin(@RequestBody OauthLoginDto.Request oauthLoginRequestDto,
                                                              HttpServletRequest httpServletRequest) {

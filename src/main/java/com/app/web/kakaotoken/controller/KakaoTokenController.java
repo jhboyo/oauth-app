@@ -2,12 +2,13 @@ package com.app.web.kakaotoken.controller;
 
 import com.app.web.kakaotoken.client.KakaoTokenClient;
 import com.app.web.kakaotoken.dto.KakaoTokenDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+@Slf4j
 @Controller
 public class KakaoTokenController {
     private final KakaoTokenClient kakaoTokenClient;
@@ -16,7 +17,7 @@ public class KakaoTokenController {
     private String clientId;
 
     @Value("${kakao.client.secret}")
-    private String clientScret;
+    private String clientSecret;
 
     public KakaoTokenController(KakaoTokenClient kakaoTokenClient) {
         this.kakaoTokenClient = kakaoTokenClient;
@@ -35,10 +36,12 @@ public class KakaoTokenController {
     @GetMapping("/oauth/kakao/callback")
     public @ResponseBody String loginCallback(String code) {
 
+        log.info("## authorization code, " + code);
+
         String contentType = "application/x-www-form-urlencoded;charset=utf-8";
         KakaoTokenDto.Request kakaoTokenRequestDto = KakaoTokenDto.Request.builder()
                             .client_id(clientId)
-                            .client_secret(clientScret)
+                            .client_secret(clientSecret)
                             .grant_type("authorization_code")
                             .code(code)
                             .redirect_uri("http://localhost:8080/oauth/kakao/callback")

@@ -43,6 +43,7 @@ public class Member extends BaseEntity {
     private Role role;
 
     @Column(length = 250)
+
     private String refreshToken;
 
     private LocalDateTime tokenExpirationTime;
